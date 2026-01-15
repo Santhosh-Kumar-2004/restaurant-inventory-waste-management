@@ -17,3 +17,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+
+@app.get("/")
+def root_router():
+    return "The app is Running! 🚀"
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
