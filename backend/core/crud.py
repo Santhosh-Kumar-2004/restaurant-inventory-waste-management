@@ -147,3 +147,48 @@ def generate_invoice(db, order_id: int, gst_rate: float = 5):
     db.commit()
     db.refresh(invoice)
     return invoice
+
+def get_current_stock(db):
+    inflow = (
+        db.query(
+            InventoryInflow.inventory_item_id,
+            func.sum(InventoryInflow.quantity).label("total_in")
+        )
+        .group_by(InventoryInflow.inventory_item_id)
+        .subquery()
+    )
+
+    outflow = (
+        db.query(
+            InventoryOutflow.inventory_item_id,
+            func.sum(InventoryOutflow.quantity).label("total_out")
+        )
+        .group_by(InventoryOutflow.inventory_item_id)
+        .subquery()
+    )
+
+    waste = (
+        db.query(
+            WasteLog.inventory_item_id,
+            func.sum(WasteLog.quantity).label("total_waste")
+        )
+        .group_by(WasteLog.inventory_item_id)
+        .subquery()
+    )
+
+    results = (
+        db.query(
+            InventoryItem.id,
+            InventoryItem.name,
+            InventoryItem.unit,
+            func.coalesce(inflow.c.total_in, 0)
+            - func.coalesce(outflow.c.total_out, 0)
+            - func.coalesce(waste.c.total_waste, 0)
+        )
+        .outerjoin(inflow, inflow.c.inventory_item_id == InventoryItem.id)
+        .outerjoin(outflow, outflow.c.inventory_item_id == InventoryItem.id)
+        .outerjoin(waste, waste.c.inventory_item_id == InventoryItem.id)
+        .all()
+    )
+
+    return results
