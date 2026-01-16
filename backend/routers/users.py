@@ -30,6 +30,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         db,
         user.full_name,
         user.email,
+        user.email,
         user.password
     )
 
