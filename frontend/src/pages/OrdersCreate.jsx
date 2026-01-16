@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { apiFetch } from "../api/http";
 import "../styles/OrderCreate.css"
+import Navbar from "../components/Navbar";
 
 function OrdersCreate() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -26,6 +27,7 @@ function OrdersCreate() {
 
   return (
     <div className="order-create-container">
+        <Navbar />
         <div className="order-create-card">
         <div className="order-header">
             <div className="order-icon">🍽️</div>
