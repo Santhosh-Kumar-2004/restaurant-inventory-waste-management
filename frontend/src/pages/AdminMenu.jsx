@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createMenuItem, getMenuItems, toggleMenuItem } from "../services/menuService";
 import "../styles/AdminMenu.css";
+import Navbar from "../components/Navbar";
 
 function AdminMenu() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -49,6 +50,7 @@ function AdminMenu() {
 
   return (
     <div className="admin-menu-container">
+        <Navbar />
       <div className="admin-menu-header">
         <h2>Menu Management</h2>
         <p>Create and control your restaurant's digital menu</p>
