@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getMenuItems } from "../services/menuService";
 import { createOrder, addOrderItem } from "../services/orderService";
-import "../styles/CustomerMenu.css";
 import Navbar from "../components/Navbar";
+import "../styles/CustomerMenu.css";
 
 function CustomerMenu() {
-  const params = new URLSearchParams(window.location.search);
-  const tableNumber = Number(params.get("table"));
+  const tableNumber = 1; // Temporary hardcode
 
   const [menu, setMenu] = useState([]);
   const [cart, setCart] = useState([]);
@@ -15,8 +14,12 @@ function CustomerMenu() {
 
   useEffect(() => {
     async function loadMenu() {
-      const data = await getMenuItems();
-      setMenu(data.filter((item) => item.is_available));
+      try {
+        const data = await getMenuItems();
+        setMenu(data.filter((item) => item.is_available));
+      } catch (err) {
+        console.error("Failed to load menu", err);
+      }
     }
     loadMenu();
   }, []);
@@ -34,10 +37,11 @@ function CustomerMenu() {
   };
 
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter(item => item.id !== id));
+    setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const cartTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const placeOrder = async () => {
     try {
@@ -62,24 +66,29 @@ function CustomerMenu() {
     }
   };
 
-  if (!tableNumber) return <div className="qr-error">Invalid QR Code. Please ask staff for assistance.</div>;
-
   return (
     <div className="customer-menu-app">
-        <Navbar />
-      <header className="menu-nav">
-        <h1>KitchenPro</h1>
-        <div className="table-badge">Table {tableNumber}</div>
+      <Navbar />
+
+      <header className="menu-hero">
+        <div className="hero-content">
+          <h1>KitchenPro</h1>
+          <div className="table-badge">Table {tableNumber}</div>
+        </div>
       </header>
 
       <div className="menu-container">
         <section className="menu-list">
-          <h3>Menu</h3>
+          <div className="section-title">
+            <h3>Our Selection</h3>
+            <span className="item-count">{menu.length} Items Available</span>
+          </div>
+          
           {menu.map((item) => (
             <div className="menu-item-card" key={item.id}>
               <div className="item-details">
+                <span className="category-pill">{item.category}</span>
                 <h4>{item.name}</h4>
-                <p className="item-category">{item.category}</p>
                 <span className="price">₹{item.price}</span>
               </div>
               <button className="add-btn" onClick={() => addToCart(item)}>
@@ -90,39 +99,51 @@ function CustomerMenu() {
         </section>
 
         {cart.length > 0 && (
-          <div className="cart-overlay">
-            <div className="cart-content">
-              <h3>Your Order</h3>
-              <div className="cart-items">
+          <div className="cart-sticky-container">
+            <div className="cart-overlay">
+              <div className="cart-header">
+                <h3>Your Selection ({totalItems})</h3>
+                <button className="close-cart" onClick={() => setCart([])}>Clear</button>
+              </div>
+              
+              <div className="cart-items-list">
                 {cart.map((item) => (
                   <div key={item.id} className="cart-row">
-                    <span>{item.name} <small>x{item.quantity}</small></span>
-                    <span>₹{item.price * item.quantity}</span>
+                    <div className="cart-item-info">
+                      <span className="qty">{item.quantity}x</span>
+                      <span className="name">{item.name}</span>
+                    </div>
+                    <div className="cart-item-actions">
+                      <span className="row-total">₹{item.price * item.quantity}</span>
+                      <button className="remove-btn" onClick={() => removeFromCart(item.id)}>
+                        ✕
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
-              <div className="cart-total">
-                <span>Total Amount</span>
-                <span>₹{cartTotal}</span>
+
+              <div className="cart-footer">
+                <div className="cart-total-display">
+                  <span>Grand Total</span>
+                  <span className="total-amount">₹{cartTotal}</span>
+                </div>
+                <button className="place-order-btn" onClick={placeOrder}>
+                  Confirm & Place Order
+                </button>
               </div>
-              <button className="place-order-btn" onClick={placeOrder}>
-                Place Order Now
-              </button>
-              <button className="place-order-btn" onClick={removeFromCart}>
-                Remove From Cart
-              </button>
             </div>
           </div>
         )}
 
         {message && (
           <div className="success-modal">
-            <div className="modal-content">
-              <div className="success-icon">🎉</div>
-              <h2>Thank You!</h2>
+            <div className="modal-content animate-pop">
+              <div className="success-icon">🥘</div>
+              <h2>Order Received!</h2>
               <p>{message}</p>
-              {orderId && <div className="order-id-tag">Order ID: #{orderId}</div>}
-              <button onClick={() => setMessage("")}>Close</button>
+              {orderId && <div className="order-id-tag">Order Reference: #{orderId}</div>}
+              <button className="modal-close-btn" onClick={() => setMessage("")}>Back to Menu</button>
             </div>
           </div>
         )}
