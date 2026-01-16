@@ -6,7 +6,7 @@ from fastapi import Depends, APIRouter, HTTPException
 from core.database import get_db
 # from main import get_current_user
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(tags=["Users"])
 
 def get_current_user(
     email: str,
