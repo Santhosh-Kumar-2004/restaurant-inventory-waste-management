@@ -32,12 +32,13 @@ function Navbar() {
               </Link>
             )}
             {/* 👑 Admin-only links */}
+
             {user.role === "admin" && (
-              <Link to="/orders/create" className="nav-link admin-link">
-                Create Orders
+              <Link to="/orders" className="nav-link admin-link">
+                Orders
               </Link>
             )}
-            {user.role === "admin" && (
+            {/* {user.role === "admin" && (
               <Link to="/orders/items" className="nav-link admin-link">
                 Order Items
               </Link>
@@ -51,7 +52,7 @@ function Navbar() {
               <Link to="/admin/menu" className="nav-link admin-link">
                 Create Menu item
               </Link>
-            )}
+            )} */}
             {/* {user.role === "admin" && (
               <Link to="/inventory/inflow" className="nav-link admin-link">
                 Inventory Inflow
