@@ -1,5 +1,5 @@
 from schemas.user import UserCreate, UserLogin, UserResponse, RoleUpdate
-import models
+from models.user import User
 from core.crud import (
     create_user as create_user_db,
     authenticate_user,
@@ -17,7 +17,7 @@ def get_current_user(
     email: str,
     db: Session = Depends(get_db)
 ):
-    user = db.query(models.User).filter(models.User.email == email).first()
+    user = db.query(User).filter(User.email == email).first()
     if not user:
         raise HTTPException(status_code=401, detail="Invalid user")
     return user
@@ -58,7 +58,7 @@ def get_users(
     if current_user.role.value != "admin":
         raise HTTPException(status_code=403, detail="Admin access required")
 
-    return db.query(models.User).all()
+    return db.query(User).all()
 
 
 @router.put("/users/{user_id}/role", response_model=UserResponse)
