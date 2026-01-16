@@ -1,13 +1,15 @@
-function App() {
+import Login from "./pages/Login";
+import Inventory from "./pages/Inventory";
 
+function App() {
   return (
-    <>
-      <div>
-        <h1>Restaurant Inventory & Waste Management</h1>
-        <p>Frontend is running successfully</p>
+    <div>
+      <h1>Restaurant Inventory System</h1>
+      <Login />
+      <hr />
+      <Inventory />
     </div>
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
