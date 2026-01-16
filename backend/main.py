@@ -1,10 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from fastapi import Depends, HTTPException
-from sqlalchemy.orm import Session
-from core.database import get_db
-from models import user
 from routers.users import router as user_router
 from routers.inventory import router as inventory_router
 from routers.reports import router as report_router
