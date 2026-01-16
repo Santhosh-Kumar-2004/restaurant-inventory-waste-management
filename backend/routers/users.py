@@ -30,7 +30,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
         db,
         user.full_name,
         user.email,
-        user.email,
+        # user.email,
         user.password
     )
 
@@ -44,6 +44,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     return {
         "message": "Login successful",
         "user_id": db_user.id,
+        "email": db_user.email,
         "role": db_user.role.value
     }
 
