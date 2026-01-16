@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { addOrderItem } from "../services/orderService";
 import { getMenuItems } from "../services/menuService";
-import "./OrderItems.css";
+import "../styles/OrderItems.css";
 
 function OrderItems() {
   const orderId = localStorage.getItem("current_order_id");
