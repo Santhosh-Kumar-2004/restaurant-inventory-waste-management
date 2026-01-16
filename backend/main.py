@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from core.database import get_db
 from models import user
 from routers.users import router as user_router
+from routers.inventory import router as inventory_router
 
 
 load_dotenv()
@@ -33,3 +34,4 @@ def health_check():
     return {"status": "ok"}
 
 app.include_router(user_router)
+app.include_router(inventory_router)
