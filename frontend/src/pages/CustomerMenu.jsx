@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getMenuItems } from "../services/menuService";
 import { createOrder, addOrderItem } from "../services/orderService";
+import "./CustomerMenu.css";
 
 function CustomerMenu() {
   const params = new URLSearchParams(window.location.search);
@@ -31,11 +32,17 @@ function CustomerMenu() {
     });
   };
 
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter(item => item.id !== id));
+  };
+
+  const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
   const placeOrder = async () => {
     try {
       const order = await createOrder({
         table_number: tableNumber,
-        created_by: null, // SYSTEM / GUEST
+        created_by: null,
       });
 
       for (const item of cart) {
@@ -48,43 +55,76 @@ function CustomerMenu() {
 
       setOrderId(order.order_id);
       setCart([]);
-      setMessage("Order placed successfully");
+      setMessage("Order placed successfully! Please wait while we prepare your meal.");
     } catch (err) {
       setMessage(err.message);
     }
   };
 
-  if (!tableNumber) {
-    return <p>Invalid QR code</p>;
-  }
+  if (!tableNumber) return <div className="qr-error">Invalid QR Code. Please ask staff for assistance.</div>;
 
   return (
-    <div>
-      <h2>Table {tableNumber} – Menu</h2>
+    <div className="customer-menu-app">
+      <header className="menu-nav">
+        <h1>KitchenPro</h1>
+        <div className="table-badge">Table {tableNumber}</div>
+      </header>
 
-      {menu.map((item) => (
-        <div key={item.id}>
-          <strong>{item.name}</strong> – ₹{item.price}
-          <button onClick={() => addToCart(item)}>Add</button>
-        </div>
-      ))}
+      <div className="menu-container">
+        <section className="menu-list">
+          <h3>Menu</h3>
+          {menu.map((item) => (
+            <div className="menu-item-card" key={item.id}>
+              <div className="item-details">
+                <h4>{item.name}</h4>
+                <p className="item-category">{item.category}</p>
+                <span className="price">₹{item.price}</span>
+              </div>
+              <button className="add-btn" onClick={() => addToCart(item)}>
+                Add <span>+</span>
+              </button>
+            </div>
+          ))}
+        </section>
 
-      <hr />
+        {cart.length > 0 && (
+          <div className="cart-overlay">
+            <div className="cart-content">
+              <h3>Your Order</h3>
+              <div className="cart-items">
+                {cart.map((item) => (
+                  <div key={item.id} className="cart-row">
+                    <span>{item.name} <small>x{item.quantity}</small></span>
+                    <span>₹{item.price * item.quantity}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-total">
+                <span>Total Amount</span>
+                <span>₹{cartTotal}</span>
+              </div>
+              <button className="place-order-btn" onClick={placeOrder}>
+                Place Order Now
+              </button>
+              <button className="place-order-btn" onClick={removeFromCart}>
+                Remove From Cart
+              </button>
+            </div>
+          </div>
+        )}
 
-      <h3>Cart</h3>
-
-      {cart.map((item) => (
-        <p key={item.id}>
-          {item.name} × {item.quantity}
-        </p>
-      ))}
-
-      {cart.length > 0 && (
-        <button onClick={placeOrder}>Place Order</button>
-      )}
-
-      {message && <p>{message}</p>}
-      {orderId && <p>Your Order ID: {orderId}</p>}
+        {message && (
+          <div className="success-modal">
+            <div className="modal-content">
+              <div className="success-icon">🎉</div>
+              <h2>Thank You!</h2>
+              <p>{message}</p>
+              {orderId && <div className="order-id-tag">Order ID: #{orderId}</div>}
+              <button onClick={() => setMessage("")}>Close</button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
