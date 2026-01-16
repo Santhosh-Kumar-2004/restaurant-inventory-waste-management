@@ -18,6 +18,7 @@ import OrderItems from "./pages/OrderItems";
 import Invoice from "./pages/Invoice";
 import AdminMenu from "./pages/AdminMenu";
 import Orders from "./pages/Orders";
+import CustomerMenu from "./pages/CustomerMenu";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/menu" element={<CustomerMenu />} />
 
         {/* 🔐 Authenticated Routes */}
         <Route element={<PrivateRoute />}>
