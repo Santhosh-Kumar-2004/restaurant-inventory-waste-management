@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getInventoryReport } from "../services/inventoryService";
 import { apiFetch } from "../api/http";
+import "../styles/InventoryWaste.css"
 
 function InventoryWaste() {
   const user = JSON.parse(localStorage.getItem("user"));
