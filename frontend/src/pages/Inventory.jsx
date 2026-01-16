@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getInventoryReport } from "../services/inventoryService";
+import "../styles/Inventory.css"
 
 function Inventory() {
   const [items, setItems] = useState([]);
