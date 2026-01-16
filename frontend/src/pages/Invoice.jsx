@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { generateInvoice } from "../services/orderService";
 import "../styles/Invoice.css";
+import Navbar from "../components/Navbar";
 
 function Invoice() {
   const orderId = localStorage.getItem("current_order_id");
@@ -30,6 +31,7 @@ function Invoice() {
 
   return (
     <div className="invoice-page-container">
+        <Navbar />
       <div className="invoice-actions">
         <h2>Checkout & Billing</h2>
         {!invoice && (
