@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMenuItems } from "../services/menuService";
 import { createOrder, addOrderItem } from "../services/orderService";
-import "./CustomerMenu.css";
+import "../styles/CustomerMenu.css";
 
 function CustomerMenu() {
   const params = new URLSearchParams(window.location.search);
