@@ -11,6 +11,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [result, setResult] = useState("");
   const navigate = useNavigate();
+//   const user = JSON.parse(localStorage.getItem("user"));
+
 
   
   const handleLogin = async () => {
@@ -29,6 +31,12 @@ function Login() {
 
   return (
     <div className="login-page-container">
+        {/* {user.role === "admin" && (
+  <p>
+    <a href="/admin/users">Manage Users</a>
+  </p>
+)} */}
+
         <div className="login-card">
         <div className="login-header">
             <div className="login-icon">🔐</div>
