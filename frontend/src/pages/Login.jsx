@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { loginUser } from "../services/authService";
 import "../styles/Login.css"
+import Register from "./Register";
+import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -65,7 +67,7 @@ function Login() {
         )}
         
         <div className="login-footer">
-            <p>Secure agricultural auction platform</p>
+            <p>Wanna Create Account? <Link to="/register">Register</Link></p>
         </div>
         </div>
     </div>

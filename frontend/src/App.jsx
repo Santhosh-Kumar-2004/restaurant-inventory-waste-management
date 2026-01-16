@@ -5,39 +5,20 @@ import Inventory from "./pages/Inventory";
 // import Orders from "./pages/Orders";
 
 function App() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  // const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) {
-    return (
-      <div>
-        <Login />
-        <hr />
-        <Link to="/register">Register</Link>
 
-        <Routes>
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </div>
-    );
-  }
 
   return (
     <div>
       <h1>Restaurant System</h1>
 
-      <button
-        onClick={() => {
-          localStorage.removeItem("user");
-          window.location.reload();
-        }}
-      >
-        Logout
-      </button>
-
       <Routes>
         <Route path="/" element={<Inventory />} />
         {/* <Route path="/orders" element={<Orders />} /> */}
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
