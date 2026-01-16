@@ -9,12 +9,17 @@ function Login() {
 
   const handleLogin = async () => {
     try {
-      const res = await loginUser({ email, password });
-      setResult(JSON.stringify(res, null, 2));
+        const res = await loginUser({ email, password });
+
+        localStorage.setItem("user", JSON.stringify(res));
+        setResult("Login successful");
+
+        window.location.reload(); // simple refresh-based flow
     } catch (err) {
-      setResult(err.message);
+        setResult(err.message);
     }
-  };
+    };
+
 
   return (
     <div className="login-page-container">
