@@ -16,27 +16,52 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-page-container">
+        <div className="login-card">
+        <div className="login-header">
+            <div className="login-icon">🔐</div>
+            <h2>Welcome Back</h2>
+            <p>Enter your credentials to access your account</p>
+        </div>
 
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        <div className="login-form">
+            <div className="input-field-group">
+            <label>Email Address</label>
+            <input
+                placeholder="example@mail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            </div>
 
-      <input
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+            <div className="input-field-group">
+            <label>Password</label>
+            <input
+                placeholder="••••••••"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            </div>
 
-      <button onClick={handleLogin}>Login</button>
+            <button className="login-action-btn" onClick={handleLogin}>
+            Login to Dashboard
+            </button>
+        </div>
 
-      <pre>{result}</pre>
+        {result && (
+            <div className="login-result-container">
+            <label>Server Response:</label>
+            <pre>{result}</pre>
+            </div>
+        )}
+        
+        <div className="login-footer">
+            <p>Secure agricultural auction platform</p>
+        </div>
+        </div>
     </div>
-  );
+    );
 }
 
 export default Login;
