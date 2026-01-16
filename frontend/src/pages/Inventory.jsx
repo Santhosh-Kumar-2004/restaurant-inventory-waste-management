@@ -5,6 +5,9 @@ function Inventory() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+
   useEffect(() => {
     async function loadInventory() {
       try {
@@ -21,6 +24,11 @@ function Inventory() {
   return (
     <div>
       <h2>Inventory Report</h2>
+
+        {user.role === "admin" && <p>You are an Admin</p>}
+        {user.role === "chef" && <p>You are a Chef</p>}
+        {user.role === "waiter" && <p>You are a Waiter</p>}
+
 
       {error && <p>{error}</p>}
 
