@@ -12,7 +12,7 @@ import AdminRoute from "./routers/AdminRoute";
 function App() {
   return (
     <div>
-      <h1>Restaurant System</h1>
+      {/* <h1>Restaurant System</h1> */}
 
       <Routes>
         {/* 🌍 Public Routes */}
