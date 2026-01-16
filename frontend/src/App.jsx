@@ -6,7 +6,7 @@ import AdminUsers from "./pages/AdminUsers";
 // import Orders from "./pages/Orders";
 
 function App() {
-  // const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
 
 
@@ -20,6 +20,9 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        {user.role === "admin" && (
+          <Route path="/admin/users" element={<AdminUsers />} />
+        )}
       </Routes>
     </div>
   );

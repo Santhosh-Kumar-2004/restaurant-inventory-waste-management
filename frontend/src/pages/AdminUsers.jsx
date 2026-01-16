@@ -17,7 +17,7 @@ function AdminUsers() {
     }
 
     loadUsers();
-  }, []);
+  }, [admin.email]);
 
   const handleRoleChange = async (userId, newRole) => {
     try {
