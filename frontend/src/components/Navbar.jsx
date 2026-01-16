@@ -23,14 +23,14 @@ function Navbar() {
 
           <div className="nav-links">
             <Link to="/" className="nav-link">Home</Link>
-            <Link to="/inventory" className="nav-link">Inventory</Link>
-
             {/* 👑 Admin-only links */}
             {user.role === "admin" && (
               <Link to="/admin/users" className="nav-link admin-link">
                 Staff Management
               </Link>
             )}
+            <Link to="/inventory" className="nav-link">Inventory</Link>
+
             {/* 👑 Admin-only links */}
 
             {user.role === "admin" && (
