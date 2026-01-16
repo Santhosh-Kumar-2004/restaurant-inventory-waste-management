@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Inventory from "./pages/Inventory";
-import Orders from "./pages/Orders";
+// import Orders from "./pages/Orders";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -16,9 +16,17 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Inventory />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/inventory" element={<Inventory />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+        <button
+          onClick={() => {
+            localStorage.removeItem("user");
+            window.location.reload();
+          }}
+        >
+          Logout
+        </button>
     </div>
   );
 }
