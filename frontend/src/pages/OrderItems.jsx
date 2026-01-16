@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { addOrderItem } from "../services/orderService";
+import "./OrderItems.css";
 
 function OrderItems() {
   const orderId = localStorage.getItem("current_order_id");
@@ -10,7 +11,13 @@ function OrderItems() {
   const [message, setMessage] = useState("");
 
   if (!orderId) {
-    return <p>No active order found. Please create an order first.</p>;
+    return (
+      <div className="order-error-state">
+        <div className="error-icon">⚠️</div>
+        <p>No active order found. Please create an order first.</p>
+        <button onClick={() => window.location.href='/orders/create'}>Create New Order</button>
+      </div>
+    );
   }
 
   const handleAddItem = async () => {
@@ -21,42 +28,75 @@ function OrderItems() {
         price_per_unit: Number(price),
       });
 
-      setMessage("Item added to order");
+      setMessage(`✅ ${itemName} added successfully`);
       setItemName("");
       setQuantity("");
       setPrice("");
+      
+      // Clear message after 3 seconds for better UX
+      setTimeout(() => setMessage(""), 3000);
     } catch (err) {
-      setMessage(err.message);
+      setMessage(`❌ ${err.message}`);
     }
   };
 
   return (
-    <div>
-      <h2>Add Items to Order (Order #{orderId})</h2>
+    <div className="order-items-container">
+      <div className="order-items-card">
+        <div className="order-items-header">
+          <div className="header-top">
+            <h2>Add Order Items</h2>
+            <span className="order-id-badge">Order ID: #{orderId}</span>
+          </div>
+          <p>Enter the details of the dish or drink to add to the customer's bill.</p>
+        </div>
 
-      <input
-        placeholder="Item name (e.g. Chicken Biryani)"
-        value={itemName}
-        onChange={(e) => setItemName(e.target.value)}
-      />
+        <div className="order-items-form">
+          <div className="form-group full-width">
+            <label>Item Name</label>
+            <input
+              placeholder="e.g. Grilled Salmon or Diet Coke"
+              className="styled-input"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            />
+          </div>
 
-      <input
-        type="number"
-        placeholder="Quantity"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-      />
+          <div className="form-row">
+            <div className="form-group">
+              <label>Quantity</label>
+              <input
+                type="number"
+                placeholder="1"
+                className="styled-input"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+              />
+            </div>
 
-      <input
-        type="number"
-        placeholder="Price per unit"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
+            <div className="form-group">
+              <label>Unit Price ($)</label>
+              <input
+                type="number"
+                placeholder="0.00"
+                className="styled-input"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+          </div>
 
-      <button onClick={handleAddItem}>Add Item</button>
+          <button className="add-item-btn" onClick={handleAddItem}>
+            Add to Order
+          </button>
+        </div>
 
-      <p>{message}</p>
+        {message && (
+          <div className={`order-status-msg ${message.includes("✅") ? "success" : "error"}`}>
+            {message}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
