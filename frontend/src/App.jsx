@@ -6,8 +6,8 @@ import Home from "./pages/Home";
 import Inventory from "./pages/Inventory";
 import AdminUsers from "./pages/AdminUsers";
 
-import PrivateRoute from "./routes/PrivateRoute";
-import AdminRoute from "./routes/AdminRoute";
+import PrivateRoute from "./routers/privateRoutes";
+import AdminRoute from "./routers/AdminRoute";
 
 function App() {
   return (
