@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { apiFetch } from "../api/http";
 import Navbar from "../components/Navbar";
-import "./AllOrders.css";
+import "../styles/AllOrders.css";
 
 function AllOrders() {
 //   const user = JSON.parse(localStorage.getItem("user"));
