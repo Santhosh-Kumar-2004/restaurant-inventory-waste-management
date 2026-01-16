@@ -47,6 +47,11 @@ function Navbar() {
                 Inventory Outflow
               </Link>
             )}
+            {user.role === "admin" && (
+              <Link to="/inventory/waste" className="nav-link admin-link">
+                Inventory Waste
+              </Link>
+            )}
           </div>
         </div>
 
