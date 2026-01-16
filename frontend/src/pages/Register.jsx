@@ -32,12 +32,14 @@ function Register() {
         placeholder="Full Name"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
+        required
       />
 
       <input
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       <input
@@ -45,6 +47,7 @@ function Register() {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
 
       <button onClick={handleRegister}>Register</button>
