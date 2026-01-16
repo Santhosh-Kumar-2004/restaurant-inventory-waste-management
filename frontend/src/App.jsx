@@ -19,6 +19,7 @@ import Invoice from "./pages/Invoice";
 import AdminMenu from "./pages/AdminMenu";
 import Orders from "./pages/Orders";
 import CustomerMenu from "./pages/CustomerMenu";
+import AllOrders from "./pages/AllOrders";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/orders/items" element={<OrderItems />} />
           <Route path="/orders/invoice" element={<Invoice />} />
           <Route path="/admin/menu" element={<AdminMenu />} />
+          <Route path="/orders/all" element={<AllOrders />} />
         </Route>
 
         {/* 🚫 Fallback */}
