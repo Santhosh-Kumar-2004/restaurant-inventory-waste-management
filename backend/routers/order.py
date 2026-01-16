@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from core.database import get_db
 from schemas.order import OrderCreate, OrderItemCreate, InvoiceResponse
 from core import crud
+from models.order import Order
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
@@ -40,4 +41,27 @@ def generate_invoice(
         "gst_rate": invoice.gst_rate,
         "gst_amount": invoice.gst_amount,
         "total_amount": invoice.total_amount
+    }
+
+@router.put("/{order_id}/status")
+def update_order_status(
+    order_id: int,
+    status: str,
+    db: Session = Depends(get_db),
+):
+    order = db.query(Order).filter(Order.id == order_id).first()
+
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+    if status not in ["placed", "preparing", "served"]:
+        raise HTTPException(status_code=400, detail="Invalid status")
+
+    order.status = status
+    db.commit()
+
+    return {
+        "message": "Order status updated",
+        "order_id": order.id,
+        "status": order.status
     }
