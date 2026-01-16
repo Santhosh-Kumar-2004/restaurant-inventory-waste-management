@@ -17,6 +17,7 @@ import OrdersCreate from "./pages/OrdersCreate";
 import OrderItems from "./pages/OrderItems";
 import Invoice from "./pages/Invoice";
 import AdminMenu from "./pages/AdminMenu";
+import Orders from "./pages/Orders";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/inventory/inflow" element={<InventoryInflow />} />
           <Route path="/inventory/outflow" element={<InventoryOutflow />} />
           <Route path="/inventory/waste" element={<InventoryWaste />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="/orders/create" element={<OrdersCreate />} />
           <Route path="/orders/items" element={<OrderItems />} />
           <Route path="/orders/invoice" element={<Invoice />} />
