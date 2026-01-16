@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createInventoryItem } from "../services/inventoryService";
+import "../styles/InventoryCreate.css"
 
 function InventoryCreate() {
   const [name, setName] = useState("");
