@@ -1,4 +1,4 @@
-from schemas.schema import UserCreate, UserLogin, UserResponse, RoleUpdate
+from backend.schemas.user import UserCreate, UserLogin, UserResponse, RoleUpdate
 import models
 from core.crud import create_user, authenticate_user, get_user_by_id, update_user_role
 from sqlalchemy.orm import Session
