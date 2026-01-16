@@ -1,0 +1,137 @@
+.outflow-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+  padding: 40px 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.outflow-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+}
+
+.outflow-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.outflow-header h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.outflow-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.outflow-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.styled-input {
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: #fcfdfe;
+  transition: all 0.2s;
+  color: #1e293b;
+}
+
+.styled-input:focus {
+  outline: none;
+  border-color: #3b82f6; /* Usage Blue */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+  background-color: #ffffff;
+}
+
+.outflow-submit-btn {
+  background-color: #1e293b;
+  color: white;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.outflow-submit-btn:hover {
+  background-color: #3b82f6; /* Turns Blue on hover */
+  transform: translateY(-1px);
+}
+
+.form-feedback {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-feedback.success {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.form-feedback.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.outflow-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.outflow-footer strong {
+  color: #64748b;
+  text-transform: capitalize;
+}
