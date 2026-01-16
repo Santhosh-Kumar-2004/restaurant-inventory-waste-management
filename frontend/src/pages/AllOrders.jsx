@@ -15,7 +15,7 @@ function AllOrders() {
   const loadOrders = async () => {
     setLoading(true);
     try {
-      const data = await apiFetch("/orders");
+      const data = await apiFetch("/orders/");
       // Sort orders by newest first
       setOrders(data.sort((a, b) => b.id - a.id));
     } catch (err) {
