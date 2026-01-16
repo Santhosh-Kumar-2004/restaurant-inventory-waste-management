@@ -42,42 +42,84 @@ function InventoryWaste() {
   };
 
   return (
-    <div>
-      <h2>Inventory Waste</h2>
+    <div className="waste-container">
+        <div className="waste-card">
+        <div className="waste-header">
+            <div className="header-icon">🗑️</div>
+            <h2>Waste Management</h2>
+            <p>Record spoiled, expired, or damaged inventory to maintain accurate stock.</p>
+        </div>
 
-      <select onChange={(e) => setItemId(e.target.value)}>
-        <option value="">Select Item</option>
-        {items.map((item) => (
-          <option key={item.inventory_item_id} value={item.inventory_item_id}>
-            {item.item_name}
-          </option>
-        ))}
-      </select>
+        <div className="waste-form">
+            <div className="form-group">
+            <label>Wasted Item</label>
+            <select 
+                className="styled-select" 
+                onChange={(e) => setItemId(e.target.value)}
+                value={itemId}
+            >
+                <option value="">Select an item...</option>
+                {items.map((item) => (
+                <option key={item.inventory_item_id} value={item.inventory_item_id}>
+                    {item.item_name}
+                </option>
+                ))}
+            </select>
+            </div>
 
-      <input
-        type="number"
-        placeholder="Quantity wasted"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-      />
+            <div className="form-row">
+            <div className="form-group">
+                <label>Amount Wasted</label>
+                <input
+                type="number"
+                className="styled-input"
+                placeholder="0.00"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                />
+            </div>
 
-      <select value={unit} onChange={(e) => setUnit(e.target.value)}>
-        <option value="kg">Kg</option>
-        <option value="liter">Liter</option>
-        <option value="piece">Piece</option>
-      </select>
+            <div className="form-group">
+                <label>Unit</label>
+                <select 
+                className="styled-select" 
+                value={unit} 
+                onChange={(e) => setUnit(e.target.value)}
+                >
+                <option value="kg">Kg</option>
+                <option value="liter">Liter</option>
+                <option value="piece">Piece</option>
+                </select>
+            </div>
+            </div>
 
-      <input
-        placeholder="Reason for waste (expired, spilled, overcooked)"
-        value={reason}
-        onChange={(e) => setReason(e.target.value)}
-      />
+            <div className="form-group">
+            <label>Reason for Waste</label>
+            <input
+                className="styled-input"
+                placeholder="e.g., Expired, Spilled, Overcooked"
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
+            />
+            </div>
 
-      <button onClick={handleWaste}>Add Waste</button>
+            <button className="waste-submit-btn" onClick={handleWaste}>
+            Log Waste Entry
+            </button>
+        </div>
 
-      <p>{message}</p>
+        {message && (
+            <div className={`status-message ${message.includes("successfully") ? "success" : "error"}`}>
+            {message}
+            </div>
+        )}
+
+        <div className="waste-footer">
+            <p>Reported by: <strong>{user?.email}</strong></p>
+        </div>
+        </div>
     </div>
-  );
+    );
 }
 
 export default InventoryWaste;
