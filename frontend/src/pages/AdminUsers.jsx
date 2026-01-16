@@ -54,48 +54,73 @@ function AdminUsers() {
   if (!admin) return null;
 
   return (
-    <div>
-      <h2>Admin – User Management</h2>
+    <div className="admin-container">
+        <div className="admin-card">
+        <div className="admin-header">
+            <div className="title-section">
+            <h2>User Management</h2>
+            <p>Manage restaurant staff roles and permissions</p>
+            </div>
+            <div className="admin-stats">
+            <span className="user-count">Total Users: {users.length}</span>
+            </div>
+        </div>
 
-      {error && <p>{error}</p>}
+        {error && <div className="admin-error-banner">⚠️ {error}</div>}
 
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Change Role</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.full_name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                {user.role !== "admin" && (
-                  <select
-                    value={user.role}
-                    onChange={(e) =>
-                      handleRoleChange(user.id, e.target.value)
-                    }
-                  >
-                    <option value="user">User</option>
-                    <option value="chef">Chef</option>
-                    <option value="waiter">Waiter</option>
-                    <option value="admin">admin</option>
-                  </select>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        <div className="table-responsive">
+            <table className="admin-users-table">
+            <thead>
+                <tr>
+                <th>Staff Member</th>
+                <th>Email Address</th>
+                <th>Current Role</th>
+                <th className="text-center">Modify Permissions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {users.map((user) => (
+                <tr key={user.id} className={user.role === 'admin' ? 'row-admin' : ''}>
+                    <td>
+                    <div className="user-info-cell">
+                        <div className="avatar-circle">
+                        {user.full_name.charAt(0)}
+                        </div>
+                        <span className="user-name">{user.full_name}</span>
+                    </div>
+                    </td>
+                    <td className="user-email">{user.email}</td>
+                    <td>
+                    <span className={`role-pill ${user.role}`}>
+                        {user.role}
+                    </span>
+                    </td>
+                    <td className="text-center">
+                    {user.id !== admin.id ? (
+                        <div className="select-wrapper">
+                        <select
+                            className="role-select"
+                            value={user.role}
+                            onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                        >
+                            <option value="user">User</option>
+                            <option value="chef">Chef</option>
+                            <option value="waiter">Waiter</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        </div>
+                    ) : (
+                        <span className="self-tag">Current Admin (You)</span>
+                    )}
+                    </td>
+                </tr>
+                ))}
+            </tbody>
+            </table>
+        </div>
+        </div>
     </div>
-  );
+    );
 }
 
 export default AdminUsers;
