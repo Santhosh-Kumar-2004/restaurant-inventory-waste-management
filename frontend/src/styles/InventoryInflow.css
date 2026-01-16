@@ -1,0 +1,142 @@
+.inflow-container {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+  padding: 40px 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.inflow-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.inflow-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.inflow-header h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.inflow-header p {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-top: 10px;
+}
+
+/* Form Styles */
+.inflow-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inflow-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.input-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field-group label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.styled-input, 
+.styled-select {
+  padding: 12px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #ffffff;
+  transition: all 0.2s;
+  color: #1e293b;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.styled-input:focus, 
+.styled-select:focus {
+  outline: none;
+  border-color: #10b981; /* Intake Green */
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.received-info {
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+  border: 1px dashed #cbd5e1;
+}
+
+.received-info strong {
+  color: #1e293b;
+}
+
+/* Button */
+.inflow-submit-btn {
+  background-color: #0f172a;
+  color: white;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inflow-submit-btn:hover {
+  background-color: #10b981; /* Swaps to Green on hover */
+  transform: translateY(-1px);
+}
+
+/* Alert Boxes */
+.status-alert {
+  margin-top: 25px;
+  padding: 14px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status-alert.success {
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.status-alert.error {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
