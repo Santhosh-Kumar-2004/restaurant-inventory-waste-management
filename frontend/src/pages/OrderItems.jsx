@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { addOrderItem } from "../services/orderService";
 import { getMenuItems } from "../services/menuService";
 import "../styles/OrderItems.css";
+import Navbar from "../components/Navbar";
 
 function OrderItems() {
   const orderId = localStorage.getItem("current_order_id");
@@ -55,6 +56,7 @@ function OrderItems() {
 
   return (
     <div className="order-items-container">
+        <Navbar />
       <div className="order-items-card">
         <div className="order-items-header">
           <span className="order-badge">Active Order #{orderId}</span>
