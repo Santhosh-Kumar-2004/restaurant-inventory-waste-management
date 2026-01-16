@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Inventory from "./pages/Inventory";
+import AdminUsers from "./pages/AdminUsers";
 // import Orders from "./pages/Orders";
 
 function App() {
