@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { generateInvoice } from "../services/orderService";
-import "./Invoice.css";
+import "../styles/Invoice.css";
 
 function Invoice() {
   const orderId = localStorage.getItem("current_order_id");
