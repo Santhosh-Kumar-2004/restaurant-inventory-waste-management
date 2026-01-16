@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createUser } from "../services/authService";
+import "../styles/Register.css"
 
 function Register() {
   const [fullName, setFullName] = useState("");
