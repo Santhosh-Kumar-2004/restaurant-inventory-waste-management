@@ -1,99 +1,100 @@
-/* Sticky Glassmorphism Header */
+/* Navbar.css */
+
 .navbar-container {
-  position: sticky;
+  /* This ensures it stays fixed at the top */
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  font-family: 'Inter', sans-serif;
+  width: 100%;
+  height: 70px; /* Fixed height for consistency */
+  
+  /* Layout */
+  margin: 0;
+  padding: 0 40px; /* Medium padding on sides */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers the inner content */
+  
+  /* Look & Feel */
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 9999; /* Stays above everything */
+  box-sizing: border-box; /* Prevents padding from breaking width */
 }
 
 .navbar-content {
-  max-width: 1280px;
-  margin: 0 auto;
-  height: 72px;
+  width: 100%;
+  max-width: 1400px; /* Limits width on ultra-wide screens */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
 }
 
-/* Brand Section */
+/* Left side: Logo + Links */
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
 }
 
 .navbar-brand {
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.brand-icon {
-  font-size: 1.5rem;
+  white-space: nowrap; /* Prevents logo from wrapping */
 }
 
 .navbar-logo {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1e293b;
   margin: 0;
-  letter-spacing: -0.5px;
 }
 
-/* Nav Links */
 .nav-links {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .nav-link {
   text-decoration: none;
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   padding: 8px 16px;
   border-radius: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.2s ease-in-out;
 }
 
 .nav-link:hover {
+  background-color: #f1f5f9;
   color: #0f172a;
-  background: #f1f5f9;
 }
 
-.admin-link {
-  color: #f97316; /* Highlight admin link */
-}
-
-/* User Section & Profile */
+/* Right side: User info + Logout */
 .navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.user-profile {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .user-details {
+  text-align: right;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  line-height: 1.2;
 }
 
 .user-email {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #1e293b;
+  color: #334155;
 }
 
 .role-tag {
@@ -103,35 +104,47 @@
   letter-spacing: 0.5px;
 }
 
-.role-tag.admin { color: #ef4444; }
-.role-tag.chef { color: #f59e0b; }
-.role-tag.waiter { color: #10b981; }
+/* Specific Role Colors */
+.role-tag.admin { color: #dc2626; }
+.role-tag.chef { color: #d97706; }
+.role-tag.waiter { color: #059669; }
 
 /* Logout Button */
 .logout-action-btn {
-  background: #fef2f2;
-  color: #ef4444;
-  border: 1px solid #fee2e2;
-  padding: 8px 16px;
+  background-color: #1e293b;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .logout-action-btn:hover {
-  background: #ef4444;
-  color: white;
-  border-color: #ef4444;
+  background-color: #ef4444; /* Turns red on hover */
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .nav-links, .user-details {
-    display: none;
+/* Important: Prevent content from hiding behind the navbar */
+body {
+  padding-top: 70px; 
+}
+
+/* Responsive fix */
+@media (max-width: 900px) {
+  .navbar-container {
+    padding: 0 20px;
   }
-  .navbar-content {
-    padding: 0 16px;
+  .user-details {
+    display: none; /* Hides email on small screens to prevent breaking */
+  }
+  .nav-links {
+    gap: 5px;
+  }
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 0.85rem;
   }
 }
