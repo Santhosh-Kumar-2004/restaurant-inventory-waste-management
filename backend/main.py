@@ -4,9 +4,7 @@ from dotenv import load_dotenv
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 from core.database import get_db
-import core.crud
-from schemas.schema import UserCreate, UserLogin, UserResponse, RoleUpdate
-import models.models
+from models import models
 
 
 load_dotenv()
