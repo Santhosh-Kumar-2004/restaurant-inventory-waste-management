@@ -18,21 +18,17 @@ from core.security import hash_password
 
 
 
-def hash_password(password: str) -> str:
-    return hashlib.sha256(password.encode()).hexdigest()
-
-
-def create_user(db: Session, full_name: str, email: str, password: str):
+def create_user(db, user_data):
     user = User(
-        full_name=full_name,
-        email=email,
-        password_hash=hash_password(password),
-        role=UserRole.user
+        email=user_data.email,
+        password=hash_password(user_data.password),  # 🔐 HASHED
+        role="user",
     )
     db.add(user)
     db.commit()
     db.refresh(user)
     return user
+
 
 
 def authenticate_user(db: Session, email: str, password: str):
